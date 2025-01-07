@@ -1,0 +1,35 @@
+#Task 3 Random Password Generator
+import random
+import string
+
+def generate_password(length, use_letters, use_numbers, use_symbols):
+    character_pool = ''
+    if use_letters:
+        character_pool += string.ascii_letters  
+    if use_numbers:
+        character_pool += string.digits  
+    if use_symbols:
+        character_pool += string.punctuation  
+
+    if not character_pool:
+        print("Error as no character type is been selected")
+        return None
+
+    password = ''.join(random.choice(character_pool) for _ in range(length))
+    return password
+
+if __name__ == "__main__":
+    print("Password Generator")
+
+    try:
+        length = int(input("Enter your desired password length: "))
+        use_letters = input("Include any letters? (yes/no): ").strip().lower() == 'yes'
+        use_numbers = input("Include any numbers? (yes/no): ").strip().lower() == 'yes'
+        use_symbols = input("Include any symbols? (yes/no): ").strip().lower() == 'yes'
+
+        # Generating our required password
+        password = generate_password(length, use_letters, use_numbers, use_symbols)
+        if password:
+            print(f"\nGenerated Password is: {password}")
+    except ValueError:
+        print("Invalid Please do enter valid input values.")
